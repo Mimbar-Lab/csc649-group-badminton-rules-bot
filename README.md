@@ -20,3 +20,13 @@ Press Ctrl + S (Windows) or Cmd + S (Mac) and check that the white dot next to R
 Click inside the black Terminal box at the bottom and run:
 git add .
 git commit -m "Add project overview, team table, and dataset references to README"
+
+## Architecture
+1. **User Interface (`app/main.py`):** Built with Streamlit to capture user questions and display conversation history.
+2. **Retrieval Engine (`src/chatbot.py`):** Searches `data/dataset.csv` using keyword-overlap matching to retrieve the top 3 relevant BWF rule pairs.
+3. **LLM Generation (`src/chatbot.py`):** Injects the retrieved context into a structured prompt sent to the **Google Gemini API (`gemini-2.5-flash`)**.
+
+## Model
+* **Model / API:** Google Gemini API (`gemini-2.5-flash`)
+* **Why we chose it:** Fast response speed, accurate context-grounded answers, and accessible free tier without GPU hardware.
+* **Parameters:** `temperature = 0.3` (kept low to prevent hallucinating badminton rules outside our verified dataset).
