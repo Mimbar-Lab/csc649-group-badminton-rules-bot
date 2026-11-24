@@ -3,6 +3,7 @@ import sys
 import streamlit as st
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+from src.chatbot import ask_chatbot, load_dataset
 
 st.set_page_config(
     page_title="Badminton Rules Assistant",
