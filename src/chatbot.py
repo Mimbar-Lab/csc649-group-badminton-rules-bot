@@ -1,5 +1,10 @@
 import os
 import pandas as pd
+from dotenv import load_dotenv
+from google import genai
+from google.genai import types
+
+load_dotenv()
 
 DATA_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "dataset.csv")
 
@@ -36,3 +41,28 @@ def retrieve_relevant_qa(user_query: str, top_k: int = 3) -> str:
     for _, q, a in top_matches:
         context_blocks.append(f"Q: {q}\nA: {a}")
     return "\n\n".join(context_blocks)
+
+
+def ask_chatbot(user_query: str) -> tuple[str, str]:
+    api_key = os.getenv("GEMINI_API_KEY")
+    if not api_key:
+        raise ValueError("Missing GEMINI_API_KEY. Please set it in your .env file.")
+
+    retrieved_context = retrieve_relevant_qa(user_query, top_k=3)
+    client = genai.Client(api_key=api_key)
+
+    prompt = f"""
+You are a helpful Badminton Rules Assistant.
+Answer the user's question using the Knowledge Base Context below.
+
+=== KNOWLEDGE BASE CONTEXT ===
+{retrieved_context}
+
+=== USER QUESTION ===
+{user_query}
+"""
+    response = client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=prompt,
+    )
+    return response.text, retrieved_context
