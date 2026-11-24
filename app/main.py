@@ -25,3 +25,21 @@ if "messages" not in st.session_state:
 for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
         st.markdown(msg["content"])
+
+if user_input := st.chat_input("Type your badminton rules question here..."):
+    st.session_state.messages.append({"role": "user", "content": user_input})
+    with st.chat_message("user"):
+        st.markdown(user_input)
+
+    with st.chat_message("assistant"):
+        with st.spinner("Checking BWF rulebook..."):
+            try:
+                reply, context = ask_chatbot(user_input)
+            except Exception as e:
+                reply = f"Error: {e}"
+                context = ""
+        st.markdown(reply)
+
+    st.session_state.messages.append(
+        {"role": "assistant", "content": reply, "context": context}
+    )
