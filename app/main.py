@@ -11,6 +11,12 @@ st.set_page_config(
     layout="centered",
 )
 
+with st.sidebar:
+    st.header("About This Bot")
+    st.write("**Course:** CSC649 Group Project")
+    st.write("**Domain:** BWF Badminton Rules")
+    st.write("**Model:** Google Gemini 2.5 Flash")
+
 st.title("🏸 BWF Badminton Rules Assistant")
 st.markdown("Ask me anything about badminton court dimensions, scoring systems, serving rules, faults, lets, and match regulations!")
 
