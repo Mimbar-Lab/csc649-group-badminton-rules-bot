@@ -52,8 +52,12 @@ def ask_chatbot(user_query: str) -> tuple[str, str]:
     client = genai.Client(api_key=api_key)
 
     prompt = f"""
-You are a helpful Badminton Rules Assistant.
-Answer the user's question using the Knowledge Base Context below.
+You are a helpful, accurate Badminton Rules Assistant based on official BWF Laws of Badminton.
+Answer the user's question using ONLY the verified Knowledge Base Context provided below.
+
+Rules:
+1. If the answer is in the Knowledge Base Context, explain the rule clearly, accurately, and concisely.
+2. Keep your response friendly and easy for players and beginners to understand.
 
 === KNOWLEDGE BASE CONTEXT ===
 {retrieved_context}
