@@ -1,0 +1,5 @@
+Test_ID,Question,Expected_Topic,Type
+1,"What is the maximum legal height for hitting the shuttle during a serve?","Below 1.15 metres from the court surface",In-Domain
+2,"How wide is a singles badminton court compared to doubles?","5.18 metres for singles vs 6.10 metres for doubles",In-Domain
+3,"Is the spin serve allowed in badminton?","No, prohibited under Law 9.1.5 amendment",In-Domain
+4,"How many points are needed to win a game under the 3x21 system?","21 points, 2-point lead at 20-all, capped at 30",In-Domain
