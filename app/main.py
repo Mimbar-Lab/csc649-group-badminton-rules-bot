@@ -21,6 +21,9 @@ with st.sidebar:
         st.metric("Verified BWF Rules Loaded", len(df))
     except Exception:
         st.warning("Dataset not found.")
+    if st.button("Clear Chat History"):
+        st.session_state.messages = []
+        st.rerun()
 
 st.title("🏸 BWF Badminton Rules Assistant")
 st.markdown("Ask me anything about badminton court dimensions, scoring systems, serving rules, faults, lets, and match regulations!")
