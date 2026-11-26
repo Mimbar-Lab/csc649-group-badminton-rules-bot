@@ -39,6 +39,9 @@ if "messages" not in st.session_state:
 for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
         st.markdown(msg["content"])
+        if msg.get("context"):
+            with st.expander("View Retrieved Dataset Context"):
+                st.text(msg["context"])
 
 if user_input := st.chat_input("Type your badminton rules question here..."):
     st.session_state.messages.append({"role": "user", "content": user_input})
@@ -53,6 +56,9 @@ if user_input := st.chat_input("Type your badminton rules question here..."):
                 reply = f"Error: {e}"
                 context = ""
         st.markdown(reply)
+        if context:
+            with st.expander("View Retrieved Dataset Context"):
+                st.text(context)
 
     st.session_state.messages.append(
         {"role": "assistant", "content": reply, "context": context}
