@@ -66,8 +66,12 @@ Rules:
 === USER QUESTION ===
 {user_query}
 """
-    response = client.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=prompt,
-    )
-    return response.text, retrieved_context
+    try:
+        response = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=prompt,
+            config=types.GenerateContentConfig(temperature=0.3),
+        )
+        return response.text, retrieved_context
+    except Exception as e:
+        return f"Sorry, I encountered a connection issue while contacting Gemini: {e}", retrieved_context
