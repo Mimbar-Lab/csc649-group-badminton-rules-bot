@@ -10,12 +10,14 @@ DATA_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "dataset.csv")
 
 
 def load_dataset() -> pd.DataFrame:
+    """Load the verified BWF Badminton Q&A dataset from data/dataset.csv."""
     if not os.path.exists(DATA_PATH):
         raise FileNotFoundError(f"Dataset not found at {DATA_PATH}")
     return pd.read_csv(DATA_PATH)
 
 
 def retrieve_relevant_qa(user_query: str, top_k: int = 3) -> str:
+    """Find the top_k most relevant Q&A pairs using weighted keyword overlap."""
     df = load_dataset()
     stop_words = {"what", "is", "the", "a", "an", "to", "for", "in", "on", "of", "how", "can", "i", "do", "are"}
     query_words = {
@@ -28,6 +30,7 @@ def retrieve_relevant_qa(user_query: str, top_k: int = 3) -> str:
     for _, row in df.iterrows():
         q_text = str(row["Question"]).lower()
         a_text = str(row["Answer"]).lower()
+        # Give 2 points for matching words in Question and 1 point in Answer
         score = sum(2 for w in query_words if w in q_text) + sum(1 for w in query_words if w in a_text)
         scored_rows.append((score, row["Question"], row["Answer"]))
 
@@ -44,6 +47,7 @@ def retrieve_relevant_qa(user_query: str, top_k: int = 3) -> str:
 
 
 def ask_chatbot(user_query: str) -> tuple[str, str]:
+    """Retrieve BWF rules context and generate a grounded reply using Gemini 2.5 Flash."""
     api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
         raise ValueError("Missing GEMINI_API_KEY. Please set it in your .env file.")
