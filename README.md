@@ -11,15 +11,11 @@ A domain-specific AI chatbot that answers questions about official Badminton Wor
 
 ## Domain and Dataset
 * **Domain:** Sports Rules — Badminton Rules Assistant
-* **Dataset Size:** 35 Question-Answer pairs stored in `data/dataset.csv`
+* **Dataset Size:** 38 Question-Answer pairs stored in `data/dataset.csv`
 * **Dataset Sources & References:** Summarized in our own words from official BWF sources (accessed November 2026):
   1. Badminton World Federation (BWF). *BWF Statutes, Section 4.1: Laws of Badminton*.
   2. Badminton World Federation (BWF). (2023, May 12). *BWF Council Approves Interim Ban on 'Spin Serve' (Amendment to Law 9.1.5)*.
   3. Badminton World Federation (BWF). (2026, April 26). *Key Changes Under the 3x15 Scoring System*.
-Press Ctrl + S (Windows) or Cmd + S (Mac) and check that the white dot next to README.md disappears.
-Click inside the black Terminal box at the bottom and run:
-git add .
-git commit -m "Add project overview, team table, and dataset references to README"
 
 ## Architecture
 1. **User Interface (`app/main.py`):** Built with Streamlit to capture user questions and display conversation history.
@@ -30,3 +26,24 @@ git commit -m "Add project overview, team table, and dataset references to READM
 * **Model / API:** Google Gemini API (`gemini-2.5-flash`)
 * **Why we chose it:** Fast response speed, accurate context-grounded answers, and accessible free tier without GPU hardware.
 * **Parameters:** `temperature = 0.3` (kept low to prevent hallucinating badminton rules outside our verified dataset).
+
+## How to Run
+1. Open the repository in GitHub Codespaces.
+2. Install required libraries:
+   `pip install -r requirements.txt`
+3. Copy `.env.example` to `.env` and insert your Gemini API key:
+   `cp .env.example .env`
+4. Launch the chatbot:
+   `streamlit run app/main.py`
+
+## Demo
+* **Video Demo:** [Link will be added on Day 6]
+* **Screenshots:** Available in `docs/`
+
+## Limitations
+* Keyword-overlap retrieval relies on matching English words from `data/dataset.csv`, so queries asked purely in Malay or using unusual phrasing without matching keywords trigger a polite refusal.
+* Knowledge is restricted to BWF Laws of Badminton covered in our dataset; unrelated topics are politely declined.
+
+## GenAI Use
+* **Tools Used:** Google Gemini
+* **Purpose:** Used for code debugging, boilerplate structuring, and summarizing BWF rules under FSKM GenAI Tahap 3 (Kolaborasi Hibrid, 30%). All files were verified and committed by group members.
