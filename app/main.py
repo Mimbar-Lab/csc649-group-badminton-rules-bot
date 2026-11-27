@@ -1,3 +1,4 @@
+paste this complete file:
 import os
 import sys
 import streamlit as st
@@ -27,6 +28,7 @@ with st.sidebar:
 
 st.title("🏸 BWF Badminton Rules Assistant")
 st.markdown("Ask me anything about badminton court dimensions, scoring systems, serving rules, faults, lets, and match regulations!")
+st.caption("Try asking: 'What is the maximum legal serving height?' or 'Is the spin serve allowed?'")
 
 if "messages" not in st.session_state:
     st.session_state.messages = [
