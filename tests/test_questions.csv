@@ -5,3 +5,5 @@ Test_ID,Question,Expected_Topic,Type
 4,"How many points are needed to win a game under the 3x21 system?","21 points, 2-point lead at 20-all, capped at 30",In-Domain
 5,"What is the minimum Touch n Go balance for RapidKL LRT?","Polite out-of-domain refusal",Out-of-Domain
 6,"How do I bake chocolate chip cookies?","Polite out-of-domain refusal",Out-of-Domain
+7,"What is the new BWF 3x15 scoring system taking effect in 2027?","Best of 3 to 15 points, capped at 21, intervals at 8",In-Domain
+8,"How many Hawk-Eye line-call challenges does a player get per game?","Two unsuccessful challenges per game",In-Domain
