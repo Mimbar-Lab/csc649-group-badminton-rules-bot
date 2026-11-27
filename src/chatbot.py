@@ -10,12 +10,14 @@ DATA_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "dataset.csv")
 
 
 def load_dataset() -> pd.DataFrame:
+    """Load the verified BWF Badminton Q&A dataset from data/dataset.csv."""
     if not os.path.exists(DATA_PATH):
         raise FileNotFoundError(f"Dataset not found at {DATA_PATH}")
     return pd.read_csv(DATA_PATH)
 
 
 def retrieve_relevant_qa(user_query: str, top_k: int = 3) -> str:
+    """Find the top_k most relevant Q&A pairs using weighted keyword overlap."""
     df = load_dataset()
     stop_words = {"what", "is", "the", "a", "an", "to", "for", "in", "on", "of", "how", "can", "i", "do", "are"}
     query_words = {
