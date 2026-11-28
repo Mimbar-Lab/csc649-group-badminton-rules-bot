@@ -24,9 +24,11 @@ with st.sidebar:
     if st.button("Clear Chat History"):
         st.session_state.messages = []
         st.rerun()
+    st.caption("Grounded strictly in official BWF Laws of Badminton.")
 
 st.title("🏸 BWF Badminton Rules Assistant")
 st.markdown("Ask me anything about badminton court dimensions, scoring systems, serving rules, faults, lets, and match regulations!")
+st.caption("Try asking: 'What is the maximum legal serving height?' or 'Is the spin serve allowed?'")
 
 if "messages" not in st.session_state:
     st.session_state.messages = [
